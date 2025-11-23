@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Welcome — Automatic Resume Builder</title>
+  <style>
+    :root{
+      --accent:#0b63d6;
+      --bg:#0f1724;
+      --card:#0b1220;
+      --glass: rgba(255,255,255,0.04);
+      --muted: #c6cbd6;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:
+        radial-gradient(1200px 600px at 10% 20%, rgba(11,99,214,0.12), transparent 12%),
+        radial-gradient(1000px 500px at 90% 80%, rgba(6,180,250,0.06), transparent 12%),
+        var(--bg);
+      color: #e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:36px;
+    }
+
+    .card {
+      width:100%;
+      max-width:980px;
+      border-radius:16px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 10px 40px rgba(2,6,23,0.6);
+      padding:36px;
+      display:flex;
+      gap:28px;
+      align-items:center;
+    }
+
+    .left {
+      flex:1.1;
+    }
+    .right {
+      flex:.6;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:18px;
+    }
+
+    h1{
+      margin:0 0 12px 0;
+      font-size:40px;
+      line-height:1.02;
+      letter-spacing:-0.02em;
+      color: #fff;
+    }
+    p.lead{
+      margin:0 0 20px 0;
+      color:var(--muted);
+      font-size:16px;
+    }
+
+    .cta {
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      background:var(--accent);
+      color:#fff;
+      padding:12px 18px;
+      border-radius:12px;
+      font-weight:600;
+      text-decoration:none;
+      box-shadow: 0 8px 26px rgba(11,99,214,0.28);
+      transition:transform .16s ease, box-shadow .16s ease;
+    }
+    .cta:hover{ transform:translateY(-4px); box-shadow: 0 18px 48px rgba(11,99,214,0.36); }
+
+    .sub {
+      margin-top:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* clock */
+    .clock {
+      width:220px;
+      height:220px;
+      border-radius:18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.04);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      gap:8px;
+      padding:18px;
+    }
+    .time {
+      font-size:28px;
+      font-weight:700;
+      color:#fff;
+      letter-spacing:0.01em;
+    }
+    .date {
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* small helper box */
+    .info {
+      width:100%;
+      margin-top:18px;
+      padding:14px;
+      border-radius:10px;
+      background:var(--glass);
+      color:var(--muted);
+      font-size:13px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .info .dot{
+      width:10px;height:10px;border-radius:50%;background:var(--accent);flex:0 0 10px;
+    }
+
+    /* responsive */
+    @media (max-width:880px){
+      .card{flex-direction:column-reverse;padding:20px}
+      .right{flex-direction:row}
+      .clock{width:160px;height:160px}
+      h1{font-size:28px}
+    }
+  </style>
+</head>
+<body>
+  <div class="card" role="main" aria-labelledby="welcomeTitle">
+    <div class="left">
+      <h1 id="welcomeTitle">Welcome to <span style="color:var(--accent)">Automatic Resume Builder</span></h1>
+      <p class="lead">Create a polished, printable resume in seconds. Click the button on the right to open the builder and make your resume — privacy friendly, client-side processing, and ready to export as PDF.</p>
+
+      <div class="info" role="note" aria-live="polite">
+        <div class="dot" aria-hidden="true"></div>
+        <div>
+          <strong style="color:#fff">Local-first & private</strong>
+          <div style="color:var(--muted);font-size:13px">All uploads (photo) and PDF exports are handled in your browser — nothing is uploaded to a server.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="right" aria-hidden="false">
+      <div class="clock" aria-label="Current time">
+        <div class="time" id="timeDisplay">--:--:--</div>
+        <div class="date" id="dateDisplay">Loading date…</div>
+      </div>
+
+      <a class="cta" id="openBtn" href="welcome.html" title="Create your resume">⏱️ Create Resume</a>
+      <div class="sub">Clock updates every second — click to start building your resume.</div>
+    </div>
+  </div>
+
+  <script>
+    // Live clock + friendly greeting (local time)
+    function pad2(n){ return n<10 ? '0'+n : n; }
+    function updateClock(){
+      const now = new Date();
+      const h = pad2(now.getHours());
+      const m = pad2(now.getMinutes());
+      const s = pad2(now.getSeconds());
+      document.getElementById('timeDisplay').textContent = `${h}:${m}:${s}`;
+      const opts = { weekday: 'short', year:'numeric', month:'short', day:'numeric' };
+      document.getElementById('dateDisplay').textContent = now.toLocaleDateString(undefined, opts);
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // Optional: subtle attention animation to CTA after a few seconds
+    setTimeout(()=> {
+      const btn = document.getElementById('openBtn');
+      if(!btn) return;
+      btn.animate([
+        { transform: 'translateY(0)', boxShadow: '0 8px 26px rgba(11,99,214,0.28)' },
+        { transform: 'translateY(-6px)', boxShadow: '0 24px 48px rgba(11,99,214,0.32)' },
+        { transform: 'translateY(0)', boxShadow: '0 8px 26px rgba(11,99,214,0.28)' }
+      ], { duration: 1600, iterations: 2, easing: 'ease-out' });
+    }, 1500);
+
+    // If you want the Create Resume button to open in a new tab instead:
+    // document.getElementById('openBtn').setAttribute('target','_blank');
+  </script>
+</body>
+</html>
