@@ -1,0 +1,189 @@
+:root{
+  --bg-1: #fff6ff;   /* soft warm */
+  --bg-2: #f0fbff;   /* soft cool */
+  --panel-bg: rgba(255,255,255,0.9);
+  --muted: #556077;
+  --card-shadow: 0 12px 40px rgba(9,30,63,0.09);
+  --glass: rgba(255,255,255,0.6);
+  --radius: 12px;
+
+  /* colorful accents (used for buttons/badges/gradients) */
+  --accent-a: linear-gradient(135deg,#ff6b6b,#ffa69e);     /* warm red -> peach */
+  --accent-b: linear-gradient(135deg,#8ec5ff,#6b8cff);     /* sky blue */
+  --accent-c: linear-gradient(135deg,#d6ffb7,#9bf1a6);     /* green */
+  --accent-d: linear-gradient(135deg,#ffd56b,#ff9f6b);     /* yellow -> orange */
+  --accent-e: linear-gradient(135deg,#b89bff,#7bd3ff);     /* violet -> cyan */
+
+  --accent-color: #0b63d6; /* fallback accent color */
+}
+
+/* Reset & base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+  color: #0b2340;
+
+  /* FULL COLORFUL BACKGROUND */
+  background: 
+    radial-gradient(1000px 600px at 0% 0%, rgba(255, 128, 171, 0.55), transparent 40%),
+    radial-gradient(900px 550px at 100% 0%, rgba(125, 190, 255, 0.55), transparent 40%),
+    radial-gradient(1200px 700px at 50% 120%, rgba(255, 206, 115, 0.55), transparent 45%),
+    linear-gradient(135deg, #f8eaff, #e2f6ff);
+  
+  background-attachment: fixed;
+  background-size: cover;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* app layout */
+.app{display:flex;gap:20px;padding:26px;min-height:100vh;align-items:flex-start}
+.panel{
+  width:380px;
+  background:var(--panel-bg);
+  padding:18px;
+  border-radius:var(--radius);
+  box-shadow:var(--card-shadow);
+  backdrop-filter: blur(6px) saturate(120%);
+  border: 1px solid rgba(255,255,255,0.6);
+  overflow:auto;
+}
+.preview{
+  flex:1;
+  padding:18px;
+  border-radius:var(--radius);
+  overflow:auto;
+  min-width:480px;
+}
+
+/* panel typography */
+h2{margin:0 0 8px 0;font-size:18px;color:#0b2b4a}
+.small{font-size:12px;color:var(--muted);margin-bottom:8px}
+label{display:block;font-size:13px;color:var(--muted);margin-top:12px}
+input[type=text], input[type=url], input[type=tel], input[type=email], input[type=number], textarea, select, input[type=file]{
+  width:100%;
+  padding:10px 12px;
+  margin-top:6px;
+  border-radius:10px;
+  border:1px solid rgba(11,35,70,0.06);
+  background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(250,250,250,0.85));
+  font-size:14px;
+  color:#123;
+}
+textarea{min-height:84px;resize:vertical}
+.templates{display:flex;gap:8px;margin-top:10px}
+.templates button{
+  flex:1;padding:8px;border-radius:10px;border:0;cursor:pointer;
+  background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(250,250,255,0.9));
+  box-shadow: 0 6px 20px rgba(12,36,80,0.04);
+  font-weight:600;color:#122;
+}
+
+/* buttons */
+.btn{
+  display:inline-block;padding:10px 14px;border-radius:12px;border:0;background:var(--accent-color);color:#fff;cursor:pointer;margin-top:12px;font-weight:700;
+  box-shadow: 0 8px 30px rgba(11,99,214,0.18);
+}
+.btn.secondary{
+  background: transparent;
+  color: #0b2b4a;
+  border: 1px solid rgba(11,35,70,0.06);
+  box-shadow:none;
+}
+
+/* resume card */
+.resume{
+  width:816px;
+  margin:8px auto;
+  background: linear-gradient(180deg, #ffffff, #fbfdff);
+  padding:30px;
+  border-radius:10px;
+  color:#0b2340;
+  box-shadow: 0 18px 48px rgba(13,38,76,0.08);
+  border: 1px solid rgba(11,35,70,0.04);
+}
+
+/* header */
+.r-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding-bottom:14px;margin-bottom:14px;border-bottom:1px dashed rgba(11,35,70,0.04)}
+.template-classic .name{font-family: 'Georgia', 'Times New Roman', serif; font-size:30px; font-weight:800; color:#1a2b4a}
+.template-modern .name, .template-minimal .name{font-family:Inter, system-ui; font-size:30px;font-weight:800;color:#122b4a}
+
+/* photo */
+#p-photo {
+  width:72px;height:72px;border-radius:10px;object-fit:cover;background:linear-gradient(180deg,#fff,#f7fbff);border:1px solid rgba(11,35,70,0.06);
+  box-shadow: 0 8px 20px rgba(11,35,70,0.05);
+}
+
+/* contact & socials */
+.contact{font-size:13px;color:#2b3b54;margin-top:6px}
+.contact-line{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.contact-item{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.socials{margin-top:8px;display:flex;gap:10px;align-items:center}
+.socials a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--muted);font-size:13px}
+
+/* layout columns */
+.two-col{display:flex;gap:22px}
+.left-col{flex:2}
+.right-col{flex:1}
+
+/* section styling — colorful left border using nth-of-type */
+.section{margin-bottom:14px;padding:8px;border-radius:8px}
+.section h3{
+  font-size:13px;color:#04203a;font-weight:800;margin:0 0 8px 0;padding-left:12px;border-left:8px solid transparent;
+  background: linear-gradient(90deg, rgba(255,255,255,0.0), rgba(255,255,255,0.0));
+  border-radius:6px;
+}
+
+/* alternate header border colors for visual variety */
+.left-col .section:nth-of-type(1) h3 { border-left-color: #ff7a7a; }   /* red */
+.left-col .section:nth-of-type(2) h3 { border-left-color: #7ab8ff; }   /* blue */
+.left-col .section:nth-of-type(3) h3 { border-left-color: #ffd37a; }   /* yellow */
+.left-col .section:nth-of-type(4) h3 { border-left-color: #9ef0b0; }   /* green */
+
+.right-col .section:nth-of-type(1) h3 { border-left-color: #b89bff; }  /* purple */
+.right-col .section:nth-of-type(2) h3 { border-left-color: #ff9fb8; }  /* pink */
+
+/* experience / education items */
+.edu-item,.exp-item{margin-bottom:10px;padding:8px;border-radius:8px;background: linear-gradient(180deg, rgba(250,250,255,0.6), rgba(255,255,255,0.4));border:1px solid rgba(11,35,70,0.03)}
+.exp-meta{font-size:12px;color:var(--muted);margin-top:4px}
+
+/* skill badges — colorful chips */
+.skill-badge{
+  display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;margin:6px 8px 0 0;font-size:12px;font-weight:700;
+  color:#08223d;border:0;
+  background: linear-gradient(135deg,#fff,#fff);
+  box-shadow: 0 6px 18px rgba(11,35,70,0.04);
+}
+
+/* assign different gradients to badges by position */
+#p-skills .skill-badge:nth-child(6n+1){ background: var(--accent-a); color:#fff }
+#p-skills .skill-badge:nth-child(6n+2){ background: var(--accent-b); color:#fff }
+#p-skills .skill-badge:nth-child(6n+3){ background: var(--accent-c); color:#072b10 }
+#p-skills .skill-badge:nth-child(6n+4){ background: var(--accent-d); color:#4a2700 }
+#p-skills .skill-badge:nth-child(6n+5){ background: var(--accent-e); color:#2b0b5a }
+#p-skills .skill-badge:nth-child(6n+6){ background: linear-gradient(135deg,#ffd6f0,#b7e0ff); color:#05203a }
+
+/* small utility text */
+.section .small-muted{font-size:12px;color:var(--muted)}
+
+/* responsive */
+@media (max-width:980px){
+  .app{flex-direction:column;padding:18px}
+  .panel{width:auto}
+  .resume{width:100%}
+  .two-col{flex-direction:column}
+}
+
+/* print rules: keep it simple — remove fancy background and shadows, keep colors */
+@media print{
+  body{background:#fff}
+  .app{padding:0}
+  .panel{display:none}
+  .preview{box-shadow:none;padding:0}
+  .resume{box-shadow:none;border:none;margin:0;padding:18px;width:100%;border-radius:0}
+  /* ensure colors print (browser support varies) */
+  *{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
